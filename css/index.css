@@ -1,0 +1,291 @@
+/*class Generales*/
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.row_evenly {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly
+}
+
+.column_between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.colorGris {
+    color: grey;
+}
+
+.backGris {
+    background-color: #EDEDED;
+}
+
+.backWhite {
+    background-color: #fff;
+}
+
+.colorBlue {
+    color: #0065fc;
+}
+
+.backBlue {
+    background-color: #0065fc;
+}
+
+.colorBlack {
+    color: black;
+}
+
+.noDecoration {
+    text-decoration: none;
+}
+
+.noBorder {
+    border: none;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    padding-top: 1%;
+}
+
+#header_img {
+    position: absolute;
+    z-index: -1;
+    left: 0px;
+    top: 0px;
+    height: 600px;
+    width: 100%;
+    object-fit: cover;
+}
+
+#globalSearch_section {
+    margin-top: -5%;
+    height: 90vh;
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../assets/images/header_img.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.globalInfo_container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    text-align: center;
+    height: 200px;
+    width: 70%;
+}
+
+#globalSearch_section h1 {
+    font-size: 44px;
+    color: #FFD15B;
+}
+
+.search-container {
+    width: 100%;
+}
+
+#searchBar_form {
+    width: 100%;
+}
+
+#globalSearch_section input[type="text"] {
+    padding: 20px;
+    width: 100%;
+    margin-right: -6%;
+    border: 1px solid #ccc;
+    border-radius: 11px;
+    font-size: 18px;
+}
+
+#globalSearch_section button {
+    padding: 15px 20px;
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#globalSearch_section button:hover {
+    background-color: grey;
+}
+
+
+/* Filters  */
+#filters {
+    width: 45%;
+    padding: 2%;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #FFFFFF;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 11px;
+    cursor: pointer;
+    width: 70%;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #FFFFFF;
+}
+
+/* The search field */
+.searchInput {
+    box-sizing: border-box;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+/* The search field when it gets focus/clicked on */
+.searchInput:focus {
+    outline: 3px solid #ddd;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    border: 1px solid #ddd;
+    z-index: 1;
+    width: 70%;
+}
+
+.dropdown-content input {
+    width: 100%;
+}
+
+.listOptions {
+    overflow-y: auto;
+    height: 200px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+#numberRecipes {
+    padding: 2%;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+    display: block;
+}
+
+.tag {
+    background-color: #FFD15B;
+    padding: 2%;
+    margin-right: 3%;
+    border-radius: 10px;
+}
+
+.hide_options {
+    display: none !important;
+}
+
+#recipeCards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 4%;
+}
+
+.card_recipe {
+    border-radius: 21px;
+}
+
+.card_img {
+    width: 100%;
+    height: 185px;
+    object-fit: cover;
+    border-radius: 21px 21px 0px 0px;
+}
+
+.card_container {
+    padding: 3%;
+    border-radius: 0px 0px 21px 21px;
+}
+
+.ingredients_cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
