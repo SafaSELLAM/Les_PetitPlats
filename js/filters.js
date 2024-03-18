@@ -21,7 +21,6 @@ function filterFunction(inputId, dropdownId) {
     }
 }
 
-
 /**
  * TODO : Description 
  * @returns {{ allIngredients: [string], allAppliances: [string], allUstensils: [string] }} 
@@ -55,72 +54,6 @@ function textOptionsNormalizer(type, allTypes, hasIngredient = false) {
     });
     return allTypes
 }
-
-// function createOption(text, type) {
-//     const option = document.createElement('a');
-//     option.text = text;
-//     option.addEventListener('click', () => {
-//         createTag(text, type);
-//         option.classList.add('hide_options')
-//         closeMenu();
-//     });
-//     return option;
-// }
-
-// function addOptionsToFilterList(items, listId, type) {
-//     const list = document.getElementById(listId);
-//     items.forEach(item => {
-//         const option = createOption(item, type);
-//         list.appendChild(option);
-//     });
-// }
-
-// // Créé les tags quand un filtre est selectionné
-// /**
-//  * @param {string} type correspond à ingredient, ustensils ou appliances
-//  * @param {string} text correspond à la valeur de l'élément sélectionné
-//  */
-// function createTag(text, type) {
-//     const tagContainer = document.getElementById('tags_container');
-//     const tag = document.createElement('div');
-//     tag.classList.add('tag');
-//     tag.textContent = text;
-//     tagContainer.appendChild(tag);
-
-//     // Ajouter un gestionnaire d'événements pour supprimer le tag lorsqu'on clique dessus
-//     tag.addEventListener('click', () => {
-//         tag.remove();
-//         const listOptions = document.querySelectorAll(`#list_${type} a`);
-//         listOptions.forEach(option => {
-//             if (option.textContent === text) {
-//                 option.classList.remove('hide_options')
-//             }
-//         });
-//     });
-// }
-// // Ajoute les options aux filtres sur la page HTML
-
-// async function addOptionsToFilters() {
-//     try {
-//         const { allIngredients, allAppliances, allUstensils } = await getAllValues();
-//         addOptionsToFilterList(allIngredients, 'list_ingredients', 'ingredients');
-//         addOptionsToFilterList(allAppliances, 'list_appliances', 'appliances');
-//         addOptionsToFilterList(allUstensils, 'list_ustensils', 'ustensils');
-//         // Après avoir ajouté les options, attacher les écouteurs d'événements
-//         attachEventListeners();
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
-// // Appeler la fonction pour ajouter les options aux filtres
-// addOptionsToFilters();
-
-// //appel fonction qui ajoute les eventListeners
-// addFilterListener("searchBar_ingredient", "dropdown_ingredients");
-// addFilterListener("searchBar_appareils", "dropdown_appliances");
-// addFilterListener("searchBar_ustensiles", "dropdown_ustensils");
-
-
 
 // Instance de la classe FilterManager
 const filterManager = new FilterManager();
