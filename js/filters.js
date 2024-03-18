@@ -1,5 +1,4 @@
 // import { FilterManager } from "./main.js";
-import { attachEventListeners } from "./dropdown.js";
 import { getRecipes } from "./fetch.js";
 import { FilterManager } from "./main.js";
 // Ajouter les écouteurs d'événements pour les éléments de saisie de chaque filtre
