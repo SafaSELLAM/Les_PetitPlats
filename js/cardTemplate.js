@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         // Chargement de la carte de recette et clone le contenu du template 
         const cardRecipeTemplate = document.getElementById('templateCardRecipe').content.cloneNode(true);
         //défini le chemin des images à récupérer + nom et description des frecttes
+        cardRecipeTemplate.querySelector('.card_timeRecipe').textContent = recipe.time + 'min';
         cardRecipeTemplate.querySelector('.card_img').src = `assets/images/${recipe.image}`;
         cardRecipeTemplate.querySelector('.title_Recipe').textContent = recipe.name;
         cardRecipeTemplate.querySelector('.recipe_description').textContent = recipe.description;

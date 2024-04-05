@@ -1,92 +1,105 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200..800&display=swap"
+        rel="stylesheet">
     <script src="https://kit.fontawesome.com/8c24e7947e.js" crossorigin="anonymous"></script>
     <title>Les Petits Plats</title>
 </head>
+
 <body>
- <header id="header">
-    <img src="assets/images/Logo.png" alt="logo les petits plats">
-    
-</header>
-<main>
-    <section id="globalSearch_section">
-        <div class="globalInfo_container column center">
-            <h1>Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses.</h1>
-            <div class="search-container">
-                <form id="searchBar_form">
-                    <input type="text" placeholder="une recette, un ingrédient...">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> </button>
-                </form>
+    <header id="header">
+        <img id ="header_img" src="assets/images/Logo.png" alt="logo les petits plats">
 
-            </div>
-        </div>
-    </section>
+    </header>
+    <main>
+        <section id="globalSearch_section">
+            <div class="globalInfo_container column between">
+                <h1 class="anton">Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses.</h1>
+                <div class="search-container">
+                    <form id="searchBar_form">
+                        <input class="manrope" type="text" placeholder="une recette, un ingrédient...">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> </button>
+                    </form>
 
-    <section id="main_section" class="backGris">
-        <div id="filtersHeader" class="between">
-
-            <div id="filters" class="row around">
-              <div id="filter_ingredient" class="dropdown">
-                <button class="dropbtn" data-dropdown="dropdown_ingredients">Ingrédient</button>
-                <div id="dropdown_ingredients" class="dropdown-content">
-                    <input type="text" placeholder="Ingrédients.." id="searchBar_ingredient">
-                    <div id="list_ingredients" class="listOptions"></div>
                 </div>
             </div>
-            <div id="filter_appareils" class="dropdown">
-                <button class="dropbtn" data-dropdown="dropdown_appliances">Appareils</button>
-                <div id="dropdown_appliances" class="dropdown-content">
-                    <input type="text" placeholder="Appareils.." id="searchBar_appareils">
-                    <div id="list_appliances" class="listOptions"></div>
-                </div>
-            </div>
-            <div id="filter_ustensils" class="dropdown">
-                <button class="dropbtn" data-dropdown="dropdown_ustensils">Ustensils</button>
-                <div id="dropdown_ustensils" class="dropdown-content">
-                    <input type="text" placeholder="Ustensiles.." id="searchBar_ustensiles">
-                    <div id="list_ustensils" class="listOptions"></div>
-                </div>
-            </div>
-            </div>
-            <div id="numberRecipes">1500 recettes</div>
-        </div>
-<article id="tags_container" class="row"></article>
-    </section>
-<section id="recipeCards" class="backGris">
-  
-</section>
- </main>
+        </section>
 
-       <!-- Template pour la carte de recette -->
+        <section id="main_section" class="backGris">
+            <div id="filtersHeader" class="between">
+
+                <div id="filters" class="row around">
+                    <div id="filter_ingredient" class="dropdown">
+                        <div class="btnContainer between" data-dropdown="dropdown_ingredients">
+                            <button class="dropbtn manrope ">Ingrédients</button>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div id="dropdown_ingredients" class="dropdown-content">
+                            <input type="text" placeholder="Ingrédients.." id="searchBar_ingredient">
+                            <div id="list_ingredients" class="listOptions manrope"></div>
+                        </div>
+                    </div>
+                    <div id="filter_appareils" class="dropdown">
+                        <div class="btnContainer between" data-dropdown="dropdown_appliances">
+                            <button class="dropbtn manrope">Appareils</button>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div id="dropdown_appliances" class="dropdown-content">
+                            <input type="text" placeholder="Appareils.." id="searchBar_appareils">
+                            <div id="list_appliances" class="listOptions manrope"></div>
+                        </div>
+                    </div>
+                    <div id="filter_ustensils" class="dropdown">
+                        <div class="btnContainer between" data-dropdown="dropdown_ustensils">
+                            <button class="dropbtn manrope">Ustensiles</button>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div id="dropdown_ustensils" class="dropdown-content">
+                            <input type="text" placeholder="Ustensiles.." id="searchBar_ustensiles">
+                            <div id="list_ustensils" class="listOptions manrope"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="numberRecipes" class="anton">1500 recettes</div>
+            </div>
+            <article id="tags_container" class="row"></article>
+        </section>
+        <section id="recipeCards" class="backGris">
+
+        </section>
+    </main>
+
+    <!-- Template pour la carte de recette -->
     <template id="templateCardRecipe">
         <div class="card_recipe">
-        <img class="card_img" src="" alt="image recette">
-        <div class="card_container backWhite">
-            <h3><b  class="title_Recipe"></b></h3>
-            <h4>RECETTE</h4>
-            <p class="recipe_description"></p>
-            <h4>INGREDIENTS</h4>
-            <div class="ingredients_cards" ></div>
-        </div>
+            <div class="card_timeRecipe manrope center"></div>
+            <img class="card_img" src="" alt="image recette">
+            <div class="card_container backWhite">
+                <h3 class="title_Recipe anton"><b></b></h3>
+                <h4 class="card_subtitle manrope colorGrey">RECETTE</h4>
+                <p class="recipe_description manrope"></p>
+                <h4 class=" card_subtitle manrope colorGrey">INGREDIENTS</h4>
+                <div class="ingredients_cards manrope"></div>
+            </div>
         </div>
     </template>
-    
+
     <!-- Template pour les détails des ingrédients -->
     <template id="templateIngredientsDetails">
         <div class="ingredients_details column">
-        <p class="ingredients_name"></p>
-        <p class="ingredient_quantity"></p>
+            <p class="ingredients_name manrope"></p>
+            <p class="ingredient_quantity manrope colorGrey"></p>
         </div>
     </template>
- <script src="js/filters.js" type="module"></script>
- <script src="js/cardTemplate.js" type="module"></script>
+    <script src="js/filters.js" type="module"></script>
+    <script src="js/cardTemplate.js" type="module"></script>
 </body>
+
 </html>
-
-
-
-
