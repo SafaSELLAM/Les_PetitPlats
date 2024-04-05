@@ -14,7 +14,7 @@ export class FilterManager {
         const tagContainer = document.getElementById('tags_container');
         const tag = document.createElement('div');
         tag.classList.add('tag');
-        tag.textContent = text;
+        tag.innerHTML = `<p>${text}</p> <span>&times;</span> `;
         tagContainer.appendChild(tag);
 
         // Ajouter un gestionnaire d'événements pour supprimer le tag lorsqu'on clique dessus
@@ -42,6 +42,15 @@ export class FilterManager {
             this.selected[type].splice(index, 1);
             this.addTag(text, type);
             this.addOption(text, type);
+            const listId = `list_${type}`;
+            const list = document.getElementById(listId);
+            const options = Array.from(list.getElementsByTagName('a'));
+            options.sort((a, b) => a.textContent.localeCompare(b.textContent));
+            // Réinitialiser la liste avec les options triées
+            list.innerHTML = '';
+            options.forEach(option => {
+                list.appendChild(option);
+            });
         }
     }
 
@@ -78,6 +87,7 @@ export class FilterManager {
     // Initialiser les filtres
     async initializeFilters() {
         try {
+
             const { allIngredients, allAppliances, allUstensils } = await getAllValues();
             this.addOptionsToFilterList(allIngredients, 'list_ingredients', 'ingredients');
             this.addOptionsToFilterList(allAppliances, 'list_appliances', 'appliances');
@@ -91,6 +101,7 @@ export class FilterManager {
     // Ajouter des options à la liste de filtres
     addOptionsToFilterList(items, listId, type) {
         const list = document.getElementById(listId);
+        items.sort();
         items.forEach(item => {
             const option = this.createOption(item, type);
             list.appendChild(option);

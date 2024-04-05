@@ -1,14 +1,20 @@
-// import { FilterManager } from "./main.js";
 import { getRecipes } from "./fetch.js";
 import { FilterManager } from "./main.js";
-// Ajouter les écouteurs d'événements pour les éléments de saisie de chaque filtre
+/**
+ * Ajouter les écouteurs d'événements pour les éléments de saisie de chaque filtre
+ * @param {[string]} inputId : Id des barre de recherches (serarchbar_)
+ * @param {[string]} dropdownId : Id des dropdown_ingrédients, dropdown_ustensils, dropdown_appliances
+ */
 function addFilterListener(inputId, dropdownId) {
     document.getElementById(inputId).addEventListener("keyup", () => {
         filterFunction(inputId, dropdownId);
     });
 }
-
-// Fonction générique pour filtrer les éléments en fonction de la saisie utilisateur
+/**
+ * filtrer les éléments en fonction de la saisie utilisateur
+ * @param {[string]} inputId : Id des barre de recherches (serarchbar_)
+ * @param {[string]} dropdownId : Id des dropdown_ingrédients, dropdown_ustensils, dropdown_appliances
+ */
 function filterFunction(inputId, dropdownId) {
     const input = document.getElementById(inputId);
     const filter = input.value.toUpperCase();
@@ -21,7 +27,7 @@ function filterFunction(inputId, dropdownId) {
 }
 
 /**
- * TODO : Description 
+ *Récupération des éléments de filtres (ingrédients, ustensiles, appareils)
  * @returns {{ allIngredients: [string], allAppliances: [string], allUstensils: [string] }} 
  */
 export async function getAllValues() {
@@ -39,9 +45,10 @@ export async function getAllValues() {
 }
 /**
  * Uniformisation des noms des élements dans les tableaux 
- * @param {[string]} type 
- * @param {[string]} allTypes
- * @param {boolean} hasIngredient
+ * @param {[string]} type : type de filtres (ustensiles, ingrédients,appareils)
+ * @param {[string]} allTypes : tableau final contenant les filtres 
+ * @param {boolean} hasIngredient : si le type est ingrédient ou non 
+ 
  */
 function textOptionsNormalizer(type, allTypes, hasIngredient = false) {
 
