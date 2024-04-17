@@ -4,27 +4,30 @@ document.addEventListener('DOMContentLoaded', async function () {
     const recipes = await getRecipes();
 
     recipes.forEach(recipe => {
-        // Chargement de la carte de recette et clone le contenu du template 
-        const cardRecipeTemplate = document.getElementById('templateCardRecipe').content.cloneNode(true);
-        //défini le chemin des images à récupérer + nom et description des frecttes
-        cardRecipeTemplate.querySelector('.card_timeRecipe').textContent = recipe.time + 'min';
-        cardRecipeTemplate.querySelector('.card_img').src = `assets/images/${recipe.image}`;
-        cardRecipeTemplate.querySelector('.title_Recipe').textContent = recipe.name;
-        cardRecipeTemplate.querySelector('.recipe_description').textContent = recipe.description;
-
-        // Chargement des détails des ingrédients
-        const ingredientsList = cardRecipeTemplate.querySelector('.ingredients_cards');
-        recipe.ingredients.forEach(ingredient => {
-            const ingredientDetail = document.getElementById('templateIngredientsDetails').content.cloneNode(true);
-            ingredientDetail.querySelector('.ingredients_name').textContent = ingredient.ingredient;
-            // Gère le cas où l'unité n'est pas spécifiée
-            const quantityText = ingredient.quantity ? `${ingredient.quantity} ${ingredient.unit || ''}`.trim() : '';
-            ingredientDetail.querySelector('.ingredient_quantity').textContent = quantityText;
-            ingredientsList.appendChild(ingredientDetail);
-        });
-
-        // Ajoute la carte de recette complétée au DOM
-        document.getElementById('recipeCards').appendChild(cardRecipeTemplate);
+        displayRecipes(recipe)
     });
 });
 
+export function displayRecipes(recipe) {
+    // Chargement de la carte de recette et clone le contenu du template 
+    const cardRecipeTemplate = document.getElementById('template-card-recipe').content.cloneNode(true);
+    //défini le chemin des images à récupérer + nom et description des frecttes
+    cardRecipeTemplate.querySelector('.card-time-recipe').textContent = recipe.time + 'min';
+    cardRecipeTemplate.querySelector('.card-img').src = `assets/images/${recipe.image}`;
+    cardRecipeTemplate.querySelector('.title-recipe').textContent = recipe.name;
+    cardRecipeTemplate.querySelector('.recipe-description').textContent = recipe.description;
+
+    // Chargement des détails des ingrédients
+    const ingredientsList = cardRecipeTemplate.querySelector('.ingredients-cards');
+    recipe.ingredients.forEach(ingredient => {
+        const ingredientDetail = document.getElementById('template-ingredients-details').content.cloneNode(true);
+        ingredientDetail.querySelector('.ingredients-name').textContent = ingredient.ingredient;
+        // Gère le cas où l'unité n'est pas spécifiée
+        const quantityText = ingredient.quantity ? `${ingredient.quantity} ${ingredient.unit || ''}`.trim() : '';
+        ingredientDetail.querySelector('.ingredient-quantity').textContent = quantityText;
+        ingredientsList.appendChild(ingredientDetail);
+    });
+
+    // Ajoute la carte de recette complétée au DOM
+    document.getElementById('recipe-cards').appendChild(cardRecipeTemplate);
+}

@@ -1,6 +1,7 @@
 import { getAllValues } from "./filters.js";
+import { getRecipes } from "./fetch.js";
 import { attachEventListeners } from "./dropdown.js";
-export class FilterManager {
+export class FiltersManager {
     constructor() {
         this.selected = {
             ingredients: [],
@@ -11,7 +12,7 @@ export class FilterManager {
 
     // Créer un tag
     createTag(text, type) {
-        const tagContainer = document.getElementById('tags_container');
+        const tagContainer = document.getElementById('tags-container');
         const tag = document.createElement('div');
         tag.classList.add('tag');
         tag.innerHTML = `<p>${text}</p> <span>&times;</span> `;
@@ -25,7 +26,7 @@ export class FilterManager {
     }
 
     addOption(text, type) {
-        const listId = `list_${type}`;
+        const listId = `list-${type}`;
         const list = document.getElementById(listId);
         const option = this.createOption(text, type);
         list.appendChild(option);
@@ -42,7 +43,7 @@ export class FilterManager {
             this.selected[type].splice(index, 1);
             this.addTag(text, type);
             this.addOption(text, type);
-            const listId = `list_${type}`;
+            const listId = `list-${type}`;
             const list = document.getElementById(listId);
             const options = Array.from(list.getElementsByTagName('a'));
             options.sort((a, b) => a.textContent.localeCompare(b.textContent));
@@ -59,13 +60,13 @@ export class FilterManager {
         const option = document.createElement('a');
         option.textContent = text;
         option.addEventListener('click', () => {
-            this.handleFilterOptionClick(text, type);
+            this.handleFiltersOptionClick(text, type);
         });
         return option;
     }
 
     // Gérer le clic sur une option de filtre
-    handleFilterOptionClick(text, type) {
+    handleFiltersOptionClick(text, type) {
         this.createTag(text, type);
         this.removeOption(text, type);
         this.addTag(text, type);
@@ -73,7 +74,7 @@ export class FilterManager {
 
     // Retirer une option de la liste de filtres
     removeOption(text, type) {
-        const listId = `list_${type}`;
+        const listId = `list-${type}`;
         const list = document.getElementById(listId);
         const options = list.getElementsByTagName('a');
         for (let i = 0; i < options.length; i++) {
@@ -83,24 +84,55 @@ export class FilterManager {
             }
         }
     }
+    
+    // Méthode pour initialiser les événements d'entrée pour les inputs de filtre
+    initializeInputEvents() {
+        const inputs = document.getElementsByClassName('filters-input');
+        Array.from(inputs).forEach(input => {
+            const inputId = input.id;
+            const clearIcons = document.querySelectorAll(`.clear-cross-icon[data-id="${inputId}"]`);
+
+            input.addEventListener('input', function () {
+                let inputValue = this.value.trim();
+                clearIcons.forEach(icon => icon.style.display = inputValue !== '' ? 'block' : 'none');
+            });
+
+            clearIcons.forEach(icon => {
+                icon.addEventListener('click', function () {
+                    document.getElementById(inputId).value = '';
+                    icon.style.display = 'none';
+                    this.initializeFilters();
+                }.bind(this))
+            });
+        });
+    }
 
     // Initialiser les filtres
     async initializeFilters() {
         try {
-
-            const { allIngredients, allAppliances, allUstensils } = await getAllValues();
-            this.addOptionsToFilterList(allIngredients, 'list_ingredients', 'ingredients');
-            this.addOptionsToFilterList(allAppliances, 'list_appliances', 'appliances');
-            this.addOptionsToFilterList(allUstensils, 'list_ustensils', 'ustensils');
+            const recipesInfo = await getRecipes()
+            let allIngredients = [], allAppliances = [], allUstensils = [];
+            let allItems = [];
+            recipesInfo.forEach(recipe => {
+                allItems = getAllValues(recipe, allIngredients, allUstensils, allAppliances);
+            })
+            this.addAllItemsToFiltersList(allItems, this);
             attachEventListeners();
+            return allItems;
         } catch (error) {
             console.error(error);
         }
     }
 
+    addAllItemsToFiltersList(allItems, element) {
+        element.addOptionsToFiltersList(allItems["allIngredients"], 'list-ingredients', 'ingredients');
+        element.addOptionsToFiltersList(allItems["allAppliances"], 'list-appliances', 'appliances');
+        element.addOptionsToFiltersList(allItems["allUstensils"], 'list-ustensils', 'ustensils');
+    }
     // Ajouter des options à la liste de filtres
-    addOptionsToFilterList(items, listId, type) {
+    addOptionsToFiltersList(items, listId, type) {
         const list = document.getElementById(listId);
+        list.innerHTML = '';
         items.sort();
         items.forEach(item => {
             const option = this.createOption(item, type);
