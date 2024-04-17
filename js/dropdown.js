@@ -8,19 +8,19 @@ function toggleDropdown(dropdownId) {
     allDropdowns.forEach(function (otherDropdown) {
         if (otherDropdown.id !== dropdownId) {
             otherDropdown.classList.remove('show');
-            otherDropdown.previousElementSibling.querySelector('.fa-chevron-down').classList.remove('chevronIcon');
+            otherDropdown.previousElementSibling.querySelector('.fa-chevron-down').classList.remove('chevron-icon');
         }
     });
 
     // Ouvrir ou fermer le menu actuel
     dropdown.classList.toggle('show', !isOpen);
-    chevron.classList.toggle('chevronIcon', !isOpen);
-    chevron.classList.toggle('chevronReturn', true);
+    chevron.classList.toggle('chevron-icon', !isOpen);
+    chevron.classList.toggle('chevron-return', true);
 }
 //regroupement des eventListener sur les boutons pour les appeller après chargement des éléments 
 export function attachEventListeners() {
     // selection des boutons filtres
-    let dropbtns = document.getElementsByClassName('btnContainer');
+    let dropbtns = document.getElementsByClassName('btn-container');
 
     //  ajout d'un écouteur d'eventListener
     for (let dropbtn of dropbtns) {
@@ -35,7 +35,7 @@ export function closeMenu() {
     const chevron = document.querySelectorAll('.fa-chevron-down')
     dropdowns.forEach(function (dropdown, index) {
         dropdown.classList.remove('show');
-        chevron[index].classList.remove('chevronIcon');
+        chevron[index].classList.remove('chevron-icon');
     });
 }
 
