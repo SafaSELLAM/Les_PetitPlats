@@ -39,35 +39,35 @@
     justify-content: space-between;
 }
 
-.colorGrey {
+.color-grey {
     color: #7A7A7A;
 }
 
-.backGris {
+.back-grey {
     background-color: #EDEDED;
 }
 
-.backWhite {
+.black-white {
     background-color: #fff;
 }
 
-.colorBlue {
+.color-blue {
     color: #0065fc;
 }
 
-.backBlue {
+.back-blue {
     background-color: #0065fc;
 }
 
-.colorBlack {
+.color-black {
     color: black;
 }
 
-.noDecoration {
+.no-decoration {
     text-decoration: none;
 }
 
-.noBorder {
+.no-border {
     border: none;
 }
 
@@ -117,7 +117,7 @@ header {
     height: 18px;
 }
 
-#globalSearch_section {
+#section-one__gloabl-search {
     margin-top: -5%;
     height: 90vh;
     background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../assets/images/header_img.jpg');
@@ -125,7 +125,7 @@ header {
     background-size: cover;
 }
 
-.globalInfo_container {
+.global-info-container {
     position: absolute;
     top: 60%;
     left: 50%;
@@ -135,21 +135,23 @@ header {
     width: 70%;
 }
 
-#globalSearch_section h1 {
+#section-one__gloabl-search h1 {
     font-size: 44px;
     color: #FFD15B;
+    font-weight: 400;
+    letter-spacing: 2px;
 }
 
 .search-container {
     width: 100%;
 }
 
-#searchBar_form {
+#form_searchbar {
     width: 100%;
     position: relative;
 }
 
-#globalSearch_section input[type="text"] {
+#section-one__gloabl-search input[type="text"] {
     padding: 20px;
     width: 100%;
     border: 1px solid #ccc;
@@ -158,7 +160,7 @@ header {
     flex-grow: 2;
 }
 
-#globalSearch_section button {
+#section-one__gloabl-search button {
     padding: 15px 20px;
     background-color: black;
     color: #fff;
@@ -171,7 +173,7 @@ header {
 
 }
 
-#globalSearch_section button:hover {
+#section-one__gloabl-search button:hover {
     background-color: grey;
 }
 
@@ -182,19 +184,19 @@ header {
     padding: 2% 0% 2% 5%;
 }
 
-.btnContainer {
+.btn-container {
     background-color: #FFFFFF;
     padding: 15px 10px 15px 6px;
     border-radius: 11px;
     width: 70%;
 }
 
-.chevronIcon {
+.chevron-icon {
     transform: rotate(180deg);
     transition: transform 500ms;
 }
 
-.chevronReturn {
+.chevron-return {
     transition: transform 500ms;
 }
 
@@ -212,21 +214,21 @@ header {
     background-color: #FFFFFF;
 }
 
-/* The search field */
-.searchInput {
-    box-sizing: border-box;
-    background-image: url('searchicon.png');
-    background-position: 14px 12px;
-    background-repeat: no-repeat;
-    font-size: 16px;
-    padding: 14px 20px 12px 45px;
-    border: none;
-    border-bottom: 1px solid #ddd;
+.search-input {
+    position: relative;
 }
 
-/* The search field when it gets focus/clicked on */
-.searchInput:focus {
-    outline: 3px solid #ddd;
+.clear-cross-icon {
+    display: none;
+    position: absolute;
+    top: 22px;
+    right: 40px;
+}
+
+.search-icon {
+    position: absolute;
+    top: 22px;
+    right: 19px;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -254,7 +256,7 @@ header {
     margin: 12px 12px 0 12px;
 }
 
-.listOptions {
+.list-options {
     overflow-y: auto;
     height: 200px;
     margin-top: 12%;
@@ -275,11 +277,11 @@ header {
     background-color: #FFD15B;
 }
 
-#tags_container {
+#tags-container {
     margin-left: 5%;
 }
 
-#numberRecipes {
+#number-recipes {
     padding: 2%;
 }
 
@@ -308,19 +310,19 @@ header {
     display: none !important;
 }
 
-#recipeCards {
+#recipe-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 4%;
 }
 
-.card_recipe {
+.card-recipe {
     border-radius: 21px;
     position: relative;
 }
 
-.card_timeRecipe {
+.card-time-recipe {
     position: absolute;
     font-size: 12px;
     width: 60px;
@@ -331,35 +333,35 @@ header {
     right: 20px;
 }
 
-.card_img {
+.card-img {
     width: 100%;
     height: 220px;
     object-fit: cover;
     border-radius: 21px 21px 0px 0px;
 }
 
-.card_container {
+.card-container {
     padding: 3%;
     border-radius: 0px 0px 21px 21px;
     height: 500px;
     margin-top: -2%;
 }
 
-.card_subtitle {
+.card-subtitle {
     font-size: 15px;
     font-weight: 600;
     line-height: 17px;
     letter-spacing: 2px;
 }
 
-.ingredients_cards {
+.ingredients-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     padding-top: 10%;
 }
 
-.recipe_description {
+.recipe-description {
     width: 100%;
     height: 80px;
     line-height: 20px;
@@ -377,7 +379,7 @@ header {
     margin-bottom: 8%;
 }
 
-.title_Recipe {
+.title-recipe {
     margin: 4% auto;
     line-height: 23px;
     font-size: 20px;
@@ -385,7 +387,7 @@ header {
     font-weight: 300;
 }
 
-.ingredients_name {
+.ingredients-name {
     font-weight: 500;
     font-size: 15px;
     line-height: 20px;

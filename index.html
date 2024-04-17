@@ -15,16 +15,17 @@
 
 <body>
     <header id="header">
-        <img id ="header_img" src="assets/images/Logo.png" alt="logo les petits plats">
+        <img id="header_img" src="assets/images/Logo.png" alt="logo les petits plats">
 
     </header>
     <main>
-        <section id="globalSearch_section">
-            <div class="globalInfo_container column between">
-                <h1 class="anton">Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses.</h1>
+        <section id="section-one__gloabl-search">
+            <div class="global-info-container column between">
+                <h1 class="anton">CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET DELICIEUSES.</h1>
                 <div class="search-container">
-                    <form id="searchBar_form">
-                        <input class="manrope" type="text" placeholder="une recette, un ingrédient...">
+                    <form id="form_searchbar">
+                        <input class="manrope" type="text" id="main-searchbar"
+                            placeholder="une recette, un ingrédient...">
                         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> </button>
                     </form>
 
@@ -32,70 +33,99 @@
             </div>
         </section>
 
-        <section id="main_section" class="backGris">
-            <div id="filtersHeader" class="between">
+        <section id="section-two__main" class="back-grey">
+            <div id="filters-header" class="between">
 
                 <div id="filters" class="row around">
-                    <div id="filter_ingredient" class="dropdown">
-                        <div class="btnContainer between" data-dropdown="dropdown_ingredients">
+                    <div id="filter-ingredient" class="dropdown">
+                        <div class="btn-container between" data-dropdown="dropdown-ingredients">
                             <button class="dropbtn manrope ">Ingrédients</button>
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
-                        <div id="dropdown_ingredients" class="dropdown-content">
-                            <input type="text" placeholder="Ingrédients.." id="searchBar_ingredient">
-                            <div id="list_ingredients" class="listOptions manrope"></div>
+                        <div id="dropdown-ingredients" class="dropdown-content">
+                            <div class="search-input">
+                                <input type="text" class="filters-input" id="searchbar-ingredient">
+                                <span class="clear-cross-icon" data-id="searchbar-ingredient">
+                                    <i class="fa-solid fa-xmark color-grey"></i>
+                                </span>
+                                <span class="search-icon" data-id="searchbar-ingredient">
+                                    <i class="fa-solid fa-magnifying-glass color-grey"></i>
+                                </span>
+
+                            </div>
+                            <div id="list-ingredients" class="list-options manrope"></div>
                         </div>
                     </div>
-                    <div id="filter_appareils" class="dropdown">
-                        <div class="btnContainer between" data-dropdown="dropdown_appliances">
+                    <div id="filter-appliances" class="dropdown">
+                        <div class="btn-container between" data-dropdown="dropdown-appliances">
                             <button class="dropbtn manrope">Appareils</button>
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
-                        <div id="dropdown_appliances" class="dropdown-content">
-                            <input type="text" placeholder="Appareils.." id="searchBar_appareils">
-                            <div id="list_appliances" class="listOptions manrope"></div>
+                        <div id="dropdown-appliances" class="dropdown-content">
+                            <div class="search-input">
+                                <input type="text" class="filters-input" id="searchbar-appliances">
+                                <span class="clear-cross-icon" data-id="searchbar-appliances">
+                                    <i class="fa-solid fa-xmark color-grey"></i>
+                                </span>
+                                <span class="search-icon" data-id="searchbar-appliances">
+                                    <i class="fa-solid fa-magnifying-glass color-grey"></i>
+                                </span>
+
+                            </div>
+
+                            <div id="list-appliances" class="list-options manrope"></div>
                         </div>
                     </div>
-                    <div id="filter_ustensils" class="dropdown">
-                        <div class="btnContainer between" data-dropdown="dropdown_ustensils">
+                    <div id="filter-ustensils" class="dropdown">
+                        <div class="btn-container between" data-dropdown="dropdown-ustensils">
                             <button class="dropbtn manrope">Ustensiles</button>
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
-                        <div id="dropdown_ustensils" class="dropdown-content">
-                            <input type="text" placeholder="Ustensiles.." id="searchBar_ustensiles">
-                            <div id="list_ustensils" class="listOptions manrope"></div>
+                        <div id="dropdown-ustensils" class="dropdown-content">
+                            <div class="search-input">
+                                <input type="text" class="filters-input" id="searchbar-ustensils">
+                                <span class="clear-cross-icon" data-id="searchbar-ustensils">
+                                    <i class="fa-solid fa-xmark color-grey"></i>
+                                </span>
+                                <span class="search-icon" data-id="searchbar-ustensils">
+                                    <i class="fa-solid fa-magnifying-glass color-grey"></i>
+                                </span>
+
+                            </div>
+
+                            <div id="list-ustensils" class="list-options manrope"></div>
                         </div>
                     </div>
                 </div>
-                <div id="numberRecipes" class="anton">1500 recettes</div>
+                <div id="number-recipes" class="anton">1500 recettes</div>
             </div>
-            <article id="tags_container" class="row"></article>
+            <article id="tags-container" class="row"></article>
         </section>
-        <section id="recipeCards" class="backGris">
+        <section id="recipe-cards" class="back-grey">
 
         </section>
     </main>
 
     <!-- Template pour la carte de recette -->
-    <template id="templateCardRecipe">
-        <div class="card_recipe">
-            <div class="card_timeRecipe manrope center"></div>
-            <img class="card_img" src="" alt="image recette">
-            <div class="card_container backWhite">
-                <h3 class="title_Recipe anton"><b></b></h3>
-                <h4 class="card_subtitle manrope colorGrey">RECETTE</h4>
-                <p class="recipe_description manrope"></p>
-                <h4 class=" card_subtitle manrope colorGrey">INGREDIENTS</h4>
-                <div class="ingredients_cards manrope"></div>
+    <template id="template-card-recipe">
+        <div class="card-recipe">
+            <div class="card-time-recipe manrope center"></div>
+            <img class="card-img" src="" alt="image recette">
+            <div class="card-container black-white">
+                <h3 class="title-recipe anton"><b></b></h3>
+                <h4 class="card-subtitle manrope color-grey">RECETTE</h4>
+                <p class="recipe-description manrope"></p>
+                <h4 class=" card-subtitle manrope color-grey">INGREDIENTS</h4>
+                <div class="ingredients-cards manrope"></div>
             </div>
         </div>
     </template>
 
     <!-- Template pour les détails des ingrédients -->
-    <template id="templateIngredientsDetails">
-        <div class="ingredients_details column">
-            <p class="ingredients_name manrope"></p>
-            <p class="ingredient_quantity manrope colorGrey"></p>
+    <template id="template-ingredients-details">
+        <div class="ingredients-details column">
+            <p class="ingredients-name manrope"></p>
+            <p class="ingredient-quantity manrope color-grey"></p>
         </div>
     </template>
     <script src="js/filters.js" type="module"></script>
