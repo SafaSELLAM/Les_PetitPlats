@@ -176,6 +176,7 @@ async function globalSearch() {
             });
             isAllRecipesLoaded = true
             filterManager.addAllItemsToFiltersList(allItems, filterManager);
+            filteredDisplayedRecipes = allRecipes;
         }
         document.getElementById('number-recipes').innerText = allRecipes.length + " recettes";
     }
