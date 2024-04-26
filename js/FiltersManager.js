@@ -3,11 +3,8 @@ import { getRecipes } from "./fetch.js";
 import { attachEventListeners } from "./dropdown.js";
 export class FiltersManager {
     constructor() {
-        this.selected = {
-            ingredients: [],
-            appliances: [],
-            ustensils: []
-        };
+        this.selected = { ingredients: [], appliances: [], ustensils: [] };
+        this.allTags = [];
     }
 
     // Créer un tag
@@ -34,6 +31,16 @@ export class FiltersManager {
     // Ajouter un tag aux filtres sélectionnés
     addTag(text, type) {
         this.selected[type].push(text);
+        this.allTags.push({ text: text, type: type });
+
+        // Créer un événement personnalisé pour signaler la création d'un tag avec des données
+        const tagCreatedEvent = new CustomEvent('tagCreated', {
+            detail: { allTags: this.allTags }
+        });
+
+        // Émettre l'événement personnalisé avec les données du tag
+        document.dispatchEvent(tagCreatedEvent);
+
     }
 
     // Retirer un tag des filtres sélectionnés
@@ -41,7 +48,6 @@ export class FiltersManager {
         const index = this.selected[type].indexOf(text);
         if (index !== -1) {
             this.selected[type].splice(index, 1);
-            this.addTag(text, type);
             this.addOption(text, type);
             const listId = `list-${type}`;
             const list = document.getElementById(listId);
@@ -49,9 +55,18 @@ export class FiltersManager {
             options.sort((a, b) => a.textContent.localeCompare(b.textContent));
             // Réinitialiser la liste avec les options triées
             list.innerHTML = '';
+
             options.forEach(option => {
                 list.appendChild(option);
             });
+            this.allTags = this.allTags.filter(function (item) {
+                return item.text !== text
+            })
+            //ajout event personnalisé pour gérer la suppression du tag dans les filtres
+            const tagDeletedEvent = new CustomEvent('tagDeleted', {
+                detail: { allTags: this.allTags }
+            })
+            document.dispatchEvent(tagDeletedEvent)
         }
     }
 
@@ -84,7 +99,7 @@ export class FiltersManager {
             }
         }
     }
-    
+
     // Méthode pour initialiser les événements d'entrée pour les inputs de filtre
     initializeInputEvents() {
         const inputs = document.getElementsByClassName('filters-input');
@@ -101,8 +116,17 @@ export class FiltersManager {
                 icon.addEventListener('click', function () {
                     document.getElementById(inputId).value = '';
                     icon.style.display = 'none';
-                    this.initializeFilters();
-                }.bind(this))
+                    //vient regérer la fonction de filtre par sous barre de recherche
+                    const input = document.getElementById(inputId);
+                    const filter = input.value.toUpperCase();
+                    const div = document.getElementById(input.parentElement.parentElement.id);
+                    const options = div.getElementsByTagName("a");
+                    for (const option of options) {
+                        const txtValue = option.textContent || option.innerText;
+                        option.style.display = txtValue.toUpperCase().includes(filter) ? "" : "none";
+                    }
+
+                }.bind(this)) //garanti que this dans la fonction de rappel se réfère à l'objet qui appelle la fonction
             });
         });
     }
@@ -134,9 +158,12 @@ export class FiltersManager {
         const list = document.getElementById(listId);
         list.innerHTML = '';
         items.sort();
+
         items.forEach(item => {
-            const option = this.createOption(item, type);
-            list.appendChild(option);
+            if (!this.allTags.includes(item)) {
+                const option = this.createOption(item, type);
+                list.appendChild(option);
+            }
         });
     }
 }
