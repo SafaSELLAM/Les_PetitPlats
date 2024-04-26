@@ -190,6 +190,39 @@ let isAllRecipesLoaded = false
 mainSearchInput.addEventListener('input', globalSearch)
 
 
+/**
+ * Gestion filtre de la barre de recherche principale avec boucle native For
+ * @param {string} userResearch : recherche entrée par l'utilisateur
+ * @param {array} recipes : Ensemble des recettes
+*/
+
+function filterRecipes(userResearch, recipes) {
+    const finalRecipes = [];
+    const lowercaseSearchTerm = userResearch.toLowerCase();
+    for (let i = 0; i < recipes.length; i++) {
+        const recipe = recipes[i];
+        const ingredients = recipe.ingredients;
+        let isMatch = false;
+        if (
+            recipe.name.toLowerCase().includes(lowercaseSearchTerm) ||
+            recipe.description.toLowerCase().includes(lowercaseSearchTerm)) {
+            isMatch = true
+        } else {
+            for (let j = 0; j < ingredients.length; j++) {
+                const ingredient = ingredients[j].ingredient;
+                if (ingredient.toLowerCase().includes(lowercaseSearchTerm)) {
+                    isMatch = true;
+                    break;
+                }
+            }
+        }
+        if (isMatch) {
+            finalRecipes.push(recipe);
+        }
+    }
+
+    return finalRecipes
+}
 
 /**
  * Gère l'affichage des recettes après le filtres des recettes
