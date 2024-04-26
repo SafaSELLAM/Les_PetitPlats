@@ -176,6 +176,7 @@ async function globalSearch() {
             });
             isAllRecipesLoaded = true
             filterManager.addAllItemsToFiltersList(allItems, filterManager);
+            filteredDisplayedRecipes = allRecipes;
         }
         document.getElementById('number-recipes').innerText = allRecipes.length + " recettes";
     }
@@ -189,7 +190,22 @@ submitBtn.addEventListener('click', function (event) {
 let isAllRecipesLoaded = false
 mainSearchInput.addEventListener('input', globalSearch)
 
-
+/**
+ * Gestion filtre de la barre de recherche principale avec programmation fonctionnelle 
+ * @param {string} userResearch : recherche entrée par l'utilisateur
+ * @param {array} recipes : Ensemble des recettes
+*/
+function filterRecipes(userResearch, recipes) {
+    const lowercaseSearchTerm = userResearch.toLowerCase();
+    const filteredRecipes = recipes.filter(recipe =>
+        recipe.name.toLowerCase().includes(lowercaseSearchTerm) ||
+        recipe.description.toLowerCase().includes(lowercaseSearchTerm) ||
+        recipe.ingredients.some(ingredient =>
+            ingredient.ingredient.toLowerCase().includes(lowercaseSearchTerm)
+        )
+    );
+    return filteredRecipes
+}
 
 /**
  * Gère l'affichage des recettes après le filtres des recettes
