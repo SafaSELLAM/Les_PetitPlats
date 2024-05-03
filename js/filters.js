@@ -94,11 +94,19 @@ const processAsync = async () => {
     document.addEventListener('tagDeleted', function (event) {
         const currentTags = event.detail.allTags;
         document.getElementById('recipe-cards').innerHTML = "";
-        const recipesFiltersByTags = subFilterRecipes(filteredDisplayedRecipes, currentTags);
+        const inputMainSearch = document.getElementById('main-searchbar').value;
+        let recipesFiltersByTags;
+        if (currentTags.length === 0 && !inputMainSearch) {
+            recipesFiltersByTags = subFilterRecipes(allRecipes, currentTags);
+            filteredDisplayedRecipes = allRecipes;
+        } else {
+            recipesFiltersByTags = subFilterRecipes(filteredDisplayedRecipes, currentTags);
+        }
         updateDisplayRecipes(recipesFiltersByTags)
 
     })
 }
+
 processAsync();
 
 // Ajouter les écouteurs d'événements pour les filtres
@@ -116,35 +124,34 @@ function subFilterRecipes(recipes, tags) {
     let allUstensilsItems;
     let allAppliancesItems;
     const filteredRecipes = [];
-    const ingredientsTags = tags.filter(function (item) {
-        return item.type === "ingredients"
-    })
-    const appliancesTags = tags.filter(function (item) {
-        return item.type === "appliances"
-    })
-    const ustensilsTags = tags.filter(function (item) {
-        return item.type === "ustensils"
-    })
+    //récupère tout les tags actifs en fonction de leur type et le sépare
+    const ingredientsTags = tags.filter(item => item.type === "ingredients")
+    const appliancesTags = tags.filter(item => item.type === "appliances")
+    const ustensilsTags = tags.filter(item => item.type === "ustensils")
 
     recipes.forEach(recipe => {
         const allIncluded = [];
 
         if (ingredientsTags.length !== 0) {
+            //récupère tout les ingrédients de la recette 
             allIngredientsItems = recipe["ingredients"].map((ingredient) => ingredient.ingredient.toLowerCase())
-            // Utilisation de la fonction pour les ingredientsTags
+            //vérifie si tous mes tags actifs sont présent dans les ingrédients de la recette 
             const isIncludedIngredients = areAllIncluded(ingredientsTags, allIngredientsItems);
             allIncluded.push(isIncludedIngredients)
-        } if (appliancesTags.length !== 0) {
+        }
+
+        if (appliancesTags.length !== 0) {
             allAppliancesItems = [recipe["appliance"].toLowerCase()];
-            // Utilisation de la fonction pour les appliancesTags
             const isIncludedAppliances = areAllIncluded(appliancesTags, allAppliancesItems);
             allIncluded.push(isIncludedAppliances)
-        } if (ustensilsTags.length !== 0) {
+        }
+
+        if (ustensilsTags.length !== 0) {
             allUstensilsItems = recipe["ustensils"];
-            // Utilisation de la fonction pour les ustensilsTags
             const isIncludedUstensils = areAllIncluded(ustensilsTags, allUstensilsItems);
             allIncluded.push(isIncludedUstensils)
         }
+
         if (!allIncluded.includes(false)) {
             filteredRecipes.push(recipe);
         }
@@ -158,27 +165,30 @@ function areAllIncluded(tags, items) {
     return included.every(tag => items.includes(tag));
 }
 
-
-
 // Gestion barre de filtre principale
 async function globalSearch() {
     const userResearch = this.value.toLowerCase().trim();
     if (userResearch.length >= 3) {
         isAllRecipesLoaded = false
         document.getElementById('recipe-cards').innerHTML = "";
-        filteredDisplayedRecipes = filterRecipes(userResearch, allRecipes);
+        filteredDisplayedRecipes = filterRecipes(userResearch, filteredDisplayedRecipes);
         updateDisplayRecipes(filteredDisplayedRecipes)
-    } else {
-        if (!isAllRecipesLoaded) {
-            document.getElementById('recipe-cards').innerHTML = "";
-            allRecipes.forEach(recipe => {
-                displayRecipes(recipe)
-            });
-            isAllRecipesLoaded = true
-            filterManager.addAllItemsToFiltersList(allItems, filterManager);
-            filteredDisplayedRecipes = allRecipes;
-        }
+    } else if (filterManager.allTags.length === 0 && userResearch.length > 0) {
+        document.getElementById('recipe-cards').innerHTML = "";
+        allRecipes.forEach(recipe => {
+            displayRecipes(recipe)
+        });
+        isAllRecipesLoaded = true
+        filterManager.addAllItemsToFiltersList(allItems, filterManager);
+        filteredDisplayedRecipes = allRecipes;
+
         document.getElementById('number-recipes').innerText = allRecipes.length + " recettes";
+    } else {
+        document.getElementById('recipe-cards').innerHTML = "";
+        const recipesFiltersByTags = subFilterRecipes(allRecipes, filterManager.allTags);
+        updateDisplayRecipes(recipesFiltersByTags)
+        document.getElementById('number-recipes').innerText = recipesFiltersByTags.length + " recettes";
+        filteredDisplayedRecipes = recipesFiltersByTags;
     }
 }
 const mainSearchInput = document.getElementById('main-searchbar');
@@ -189,8 +199,6 @@ submitBtn.addEventListener('click', function (event) {
 
 let isAllRecipesLoaded = false
 mainSearchInput.addEventListener('input', globalSearch)
-
-
 
 /**
  * Gère l'affichage des recettes après le filtres des recettes
