@@ -54,7 +54,9 @@ function textOptionsNormalizer(type, allTypes, hasIngredient = false) {
         normalizedType = normalizedType.charAt(0).toUpperCase() + normalizedType.slice(1);
         allTypes.push(normalizedType);
     });
-    return allTypes
+    const allTags = filterManager.allTags.map((item) => item.text);
+    const filteredAllTypes = allTypes.filter((ingredient) => !allTags.includes(ingredient));
+    return filteredAllTypes
 }
 /**
  * Convertir un mot au singulier
@@ -63,7 +65,7 @@ function textOptionsNormalizer(type, allTypes, hasIngredient = false) {
  */
 function singularize(word) {
 
-    if (word.endsWith("s") && word !== "ananas" && word !== "maïs") {
+    if (word.endsWith("s") && word !== "ananas" && word !== "maïs" && word !== "cuillère en bois" && word !== "verres") {
         return word.slice(0, -1);
     }
     return word;
